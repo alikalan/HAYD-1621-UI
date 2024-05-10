@@ -1,23 +1,24 @@
 import streamlit as st
+import requests
 
 import numpy as np
 import pandas as pd
+from PIL import Image
 
-st.markdown("""# This is a header
-## This is a sub header
-This is text""")
+st.markdown("""# how are you doing, today?
+## I hope you're doing well...
+Can you post a picture reflecting your current emotion?""")
 
-df = pd.DataFrame({
-    'first column': list(range(1, 11)),
-    'second column': np.arange(10, 101, 10)
-})
+picture = st.camera_input("Take a picture")
+url = 'http://127.0.0.1:8000/upload_your_nice_face'
+print(picture)
 
-# this slider allows the user to select a number of lines
-# to display in the dataframe
-# the selected value is returned by st.slider
-line_count = st.slider('Select a line count', 1, 10, 3)
+if picture:
+    img = Image.open(picture)
+    st.write(type(img))
+    params = {'img' : img}
+    response = requests.post(url, files = params)
 
-# and used to select the displayed lines
-head_df = df.head(line_count)
 
-head_df
+
+# st.write(response)
