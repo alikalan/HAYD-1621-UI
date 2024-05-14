@@ -27,6 +27,7 @@ url = 'https://hayd1621-docker-v2-lempkfijgq-uc.a.run.app/upload_your_nice_face'
 #url = 'http://127.0.0.1:8000/upload_your_nice_face'
 
 
+
 if picture is not None:
 
     # The key 'img' is the name of the form field for the file upload
@@ -36,6 +37,7 @@ if picture is not None:
     # Resize the image to (224, 224)
     #img = img.resize((224, 224))
     print('* * * picture taken * * *')
+
 
 
     #response.content
@@ -65,3 +67,6 @@ if st.session_state['picture'] == 'done':
         st.write(f'### Your detected emotions are:')
         st.write(f'### :blue[{emotion_list[0]}]')
         #st.write(f'### :blue[{emotion_list[1]}]')
+        
+    print(response.reason)
+    response.content
