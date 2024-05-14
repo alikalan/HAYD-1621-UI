@@ -69,3 +69,4 @@ def app():
             st.write(f'### Your detected emotions are:')
             st.write(f'### :blue[{emotion_list[0]}]')
             #st.write(f'### :blue[{emotion_list[1]}]')
+
