@@ -14,8 +14,39 @@ def app():
     st.write(f"### :orange[&#x2600; TIME TO CHECK YOUR EMOTIONS] ")
 
     col1,col2 = st.columns([0.99,0.01])
+
     # Create tabs with two options
     tab1, tab2, = st.tabs(["Upload a Picture ⬆️", "Take a Picture 📸"])
+    #styling the tabs; color, font size
+    st.markdown("""
+<style>
+
+	.stTabs [data-baseweb="tab-list"] {
+		gap: 15px;
+    }
+
+	.stTabs [data-baseweb="tab"] {
+		height: 40px;
+        white-space: pre-wrap;
+		background-color: #F0F2F6;
+		border-radius: 4px 4px 0px 0px;
+		gap: 1px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+        color: #ff6347;
+    }
+    .stTabs [data-baseweb="tab-highlight"] {
+        background-color:#F0F2F6;
+    }
+	.stTabs [aria-selected="true"] {
+  		background-color: #FFFFFF;
+	}
+    .stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p {
+    font-size:1rem;
+    }
+
+</style>""", unsafe_allow_html=True)
+
 
     # function to track changes on the session_state
     def change_picture_state():
