@@ -9,11 +9,13 @@ def app():
         st.session_state['picture']='not done'
 
     # creating to columns with 0.3/0.7 relation
-    col1, col2= st.columns([0.3,0.7])
+    st.title(f'HOW ARE YOU DOING TODAY ?')
 
-    col1.markdown("# HOW ARE YOU DOING TODAY? ")
-    col1.markdown("### __________ ")
-    col1.markdown("#### :orange[TIME TO CHECK YOUR EMOTIONS]")
+    st.write(f"### :orange[&#x2600; TIME TO CHECK YOUR EMOTIONS] ")
+
+    col1,col2 = st.columns([0.99,0.01])
+    # Create tabs with two options
+    tab1, tab2, = st.tabs(["Upload a Picture ⬆️", "Take a Picture 📸"])
 
     # function to track changes on the session_state
     def change_picture_state():
@@ -24,8 +26,8 @@ def app():
     picture_upload = None
     picture_camera = None
 
-    picture_upload = col2.file_uploader("Upload a picture", on_change=change_picture_state)
-    picture_camera = col2.camera_input("Please take a picture", on_change=change_picture_state)
+    picture_upload = tab1.file_uploader("Please upload a picture", on_change=change_picture_state)
+    picture_camera = tab2.camera_input("Please take a picture 🤳", on_change=change_picture_state)
 
 
     url = 'https://hayd1621-docker-v2-lempkfijgq-uc.a.run.app/upload_your_nice_face'
@@ -56,13 +58,13 @@ def app():
             emotion_list.append(result)
 
         if st.session_state['picture'] == 'done':
-            progress_bar = col2.progress(0)
+            progress_bar = col1.progress(0)
 
             for percentage in range(100):
                 time.sleep(0.04)
                 progress_bar.progress(percentage+1)
 
-            col2.success("Picture uploaded successfully!")
+            col1.success("Picture uploaded successfully!")
 
             #with st.expander("See your results:"):
             if len(emotion_list) == 1:

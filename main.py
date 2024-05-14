@@ -7,6 +7,44 @@ st.set_page_config(
     page_title='How are you doing today?'
 )
 
+# Custom CSS to change the background color of the sidebar and its surrounding area
+st.markdown("""
+    <style>
+    /* Sidebar background */
+    .css-1d391kg {  /* Adjust this class if needed, depending on Streamlit version */
+        background-color: #333333;  /* Set your desired sidebar background color */
+    }
+
+    /* Surrounding sidebar area background */
+    .css-1d391kg .css-1lcbmhc {  /* Adjust this class if needed, depending on Streamlit version */
+        background-color: #444444;  /* Set your desired surrounding area background color */
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+# JavaScript to dynamically apply light or dark theme classes to the sidebar
+st.markdown("""
+    <script>
+    const observer = new MutationObserver((mutationsList, observer) => {
+        for(const mutation of mutationsList) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                const body = document.querySelector('body');
+                const sidebar = document.querySelector('.css-1d391kg');  // Adjust this class if needed
+                const sidebarContainer = document.querySelector('.css-1d391kg .css-1lcbmhc');  // Adjust this class if needed
+                if (body.classList.contains('theme--dark')) {
+                    sidebar.style.backgroundColor = '#333333';  // Dark theme sidebar background
+                    sidebarContainer.style.backgroundColor = '#444444';  // Dark theme surrounding area background
+                } else {
+                    sidebar.style.backgroundColor = '#e0e0e0';  // Light theme sidebar background
+                    sidebarContainer.style.backgroundColor = '#f0f0f0';  // Light theme surrounding area background
+                }
+            }
+        }
+    });
+    observer.observe(document.querySelector('body'), { attributes: true });
+    </script>
+    """, unsafe_allow_html=True)
+
 class MultiApp:
 
     def __init__(self):
@@ -28,9 +66,9 @@ class MultiApp:
         default_index = 0,
         orientation = 'horizontal',
         styles={
-        "container": {"padding": "30!important", "background-color": "black"},
-        "icon": {"color": "white", "font-size": "18px"},
-        "nav-link": {"font-size": "18px", "text-align": "left", "margin":"10px", "color": "white"},
+        "container": {"padding": "30!important"},
+        "icon": {"font-size": "18px"},
+        "nav-link": {"font-size": "18px", "text-align": "left", "margin":"10px"},
         "nav-link-selected": {"background-color": "#60b4ff"},
     }
     )
