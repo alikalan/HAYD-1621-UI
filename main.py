@@ -7,27 +7,24 @@ st.set_page_config(
     page_title='How are you doing today?'
 )
 
+# Custom CSS to change the background color of the sidebar and its surrounding area
 st.markdown("""
     <style>
-    /* Main content background */
-    .stApp {
-        background-image: url('https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?q=80&w=2812&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-        background-size: cover;
-        background-position: center;
-    }
-
-    /* Sidebar background color */
-    .css-1d391kg {
+    /* Sidebar background */
+    .css-1d391kg {  /* Adjust this class if needed, depending on Streamlit version */
         background-color: #333333;  /* Set your desired sidebar background color */
     }
 
-    /* Surrounding sidebar area background color */
-    .css-1d391kg .css-1lcbmhc {
+    /* Surrounding sidebar area background */
+    .css-1d391kg .css-1lcbmhc {  /* Adjust this class if needed, depending on Streamlit version */
         background-color: #444444;  /* Set your desired surrounding area background color */
     }
     </style>
+    """, unsafe_allow_html=True)
+
+# JavaScript to dynamically apply light or dark theme classes to the sidebar
+st.markdown("""
     <script>
-    // Observe theme changes and update sidebar styles accordingly
     const observer = new MutationObserver((mutationsList, observer) => {
         for(const mutation of mutationsList) {
             if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
@@ -35,11 +32,11 @@ st.markdown("""
                 const sidebar = document.querySelector('.css-1d391kg');  // Adjust this class if needed
                 const sidebarContainer = document.querySelector('.css-1d391kg .css-1lcbmhc');  // Adjust this class if needed
                 if (body.classList.contains('theme--dark')) {
-                    sidebar.style.backgroundColor = '#333333';  // Dark theme sidebar background color
-                    sidebarContainer.style.backgroundColor = '#444444';  // Dark theme surrounding area background color
+                    sidebar.style.backgroundColor = '#333333';  // Dark theme sidebar background
+                    sidebarContainer.style.backgroundColor = '#444444';  // Dark theme surrounding area background
                 } else {
-                    sidebar.style.backgroundColor = '#e0e0e0';  // Light theme sidebar background color
-                    sidebarContainer.style.backgroundColor = '#f0f0f0';  // Light theme surrounding area background color
+                    sidebar.style.backgroundColor = '#e0e0e0';  // Light theme sidebar background
+                    sidebarContainer.style.backgroundColor = '#f0f0f0';  // Light theme surrounding area background
                 }
             }
         }
@@ -47,8 +44,6 @@ st.markdown("""
     observer.observe(document.querySelector('body'), { attributes: true });
     </script>
     """, unsafe_allow_html=True)
-
-
 
 class MultiApp:
 
@@ -74,7 +69,7 @@ class MultiApp:
         "container": {"padding": "30!important"},
         "icon": {"font-size": "18px"},
         "nav-link": {"font-size": "18px", "text-align": "left", "margin":"10px"},
-        "nav-link-selected": {"background-color": "#d95a00"},
+        "nav-link-selected": {"background-color": "#60b4ff"},
     }
     )
 
