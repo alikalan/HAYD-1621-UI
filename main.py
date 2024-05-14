@@ -16,20 +16,6 @@ st.markdown("""
         background-position: center;
     }
 
-    /* Sidebar background for light theme */
-    .sidebar-theme-light {
-        background-image: url('https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?q=80&w=2812&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-        background-size: cover;
-        background-position: center;
-    }
-
-    /* Sidebar background for dark theme */
-    .sidebar-theme-dark {
-        background-image: url('https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?q=80&w=2812&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-        background-size: cover;
-        background-position: center;
-    }
-
     /* Sidebar background color */
     .css-1d391kg {
         background-color: #333333;  /* Set your desired sidebar background color */
@@ -64,49 +50,6 @@ st.markdown("""
 
 
 
-# # Custom CSS to set background images
-# st.markdown("""
-#     <style>
-#     /* Main content background */
-#     .stApp {
-#         background-image: url('https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?q=80&w=2812&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-#         background-size: cover;
-#     }
-
-#     /* Sidebar background for light theme */
-#     .sidebar-theme-light {
-#         background-image: url('https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?q=80&w=2812&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-#         background-size: cover;
-#     }
-
-#     /* Sidebar background for dark theme */
-#     .sidebar-theme-dark {
-#         background-image: url('https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?q=80&w=2812&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-#         background-size: cover;
-#     }
-#     </style>
-#     <script>
-#     // Observe theme changes and update sidebar styles accordingly
-#     const observer = new MutationObserver((mutationsList, observer) => {
-#         for(const mutation of mutationsList) {
-#             if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-#                 const body = document.querySelector('body');
-#                 const sidebar = document.querySelector('.css-1d391kg'); // Sidebar class may change
-#                 if (body.classList.contains('theme--dark')) {
-#                     sidebar.classList.add('sidebar-theme-dark');
-#                     sidebar.classList.remove('sidebar-theme-light');
-#                 } else {
-#                     sidebar.classList.add('sidebar-theme-light');
-#                     sidebar.classList.remove('sidebar-theme-dark');
-#                 }
-#             }
-#         }
-#     });
-#     observer.observe(document.querySelector('body'), { attributes: true });
-#     </script>
-#     """, unsafe_allow_html=True)
-
-
 class MultiApp:
 
     def __init__(self):
@@ -131,7 +74,7 @@ class MultiApp:
         "container": {"padding": "30!important"},
         "icon": {"font-size": "18px"},
         "nav-link": {"font-size": "18px", "text-align": "left", "margin":"10px"},
-        "nav-link-selected": {"background-color": "#60b4ff"},
+        "nav-link-selected": {"background-color": "#d95a00"},
     }
     )
 
