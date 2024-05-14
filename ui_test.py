@@ -1,22 +1,30 @@
 import streamlit as st
 import requests
-import numpy as np
-import pandas as pd
-from PIL import Image
-from tensorflow import expand_dims
-from tensorflow import tile
-from keras.applications.imagenet_utils import preprocess_input
-import io
+import json
+import time
 
-st.markdown("""# how are you dong, today?
-## I hope you're doing well...
-Can you post a picture reflecting your current emotion?""")
-picture = st.camera_input('Take a picture')
+# Set session_state to not done
+if 'picture' not in st.session_state:
+    st.session_state['picture']='not done'
 
-# picture = st.file_uploader('Take a picture')
+# creating to columns with 0.3/0.7 relation
+col1, col2= st.columns([0.3,0.7])
 
-# url = 'https://hayd1621-2gsmvh4vlq-ew.a.run.app'
-url = 'http://127.0.0.1:8000/upload_your_nice_face'
+col1.markdown("# HOW ARE YOU DOING TODAY? ")
+col1.markdown("### __________ ")
+col1.markdown("#### :orange[TIME TO CHECK YOUR EMOTIONS]")
+
+# function to track changes on the session_state
+def change_picture_state():
+    st.session_state['picture']='done'
+
+### changing the input method
+#picture = col2.file_uploader("Upload a picture", on_change=change_picture_state)
+picture = col2.camera_input("Please take a picture", on_change=change_picture_state)
+
+
+url = 'https://hayd1621-docker-v2-lempkfijgq-uc.a.run.app/upload_your_nice_face'
+#url = 'http://127.0.0.1:8000/upload_your_nice_face'
 
 
 if picture is not None:
@@ -28,5 +36,32 @@ if picture is not None:
     # Resize the image to (224, 224)
     #img = img.resize((224, 224))
     print('* * * picture taken * * *')
-    print(response.reason)
-    print(response.content)
+
+
+    #response.content
+    data = response.content
+    ### Decode the bytes object into a string
+    data_str = data.decode('utf-8')
+    ### Convert to a dict
+    data_dict = json.loads(data_str)
+
+    emotion_list = []
+    # for-loop to get the keys and values
+    for key, value in data_dict.items():
+        result = f"{key} : {round(value,2)}%"
+        emotion_list.append(result)
+
+
+if st.session_state['picture'] == 'done':
+    progress_bar = col2.progress(0)
+
+    for percentage in range(100):
+        time.sleep(0.085)
+        progress_bar.progress(percentage+1)
+
+    col2.success("Picture uploaded successfully!")
+
+    with st.expander("See your results:"):
+        st.write(f'### Your detected emotions are:')
+        st.write(f'### :blue[{emotion_list[0]}]')
+        #st.write(f'### :blue[{emotion_list[1]}]')
