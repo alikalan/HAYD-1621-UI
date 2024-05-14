@@ -19,7 +19,7 @@ def change_picture_state():
     st.session_state['picture']='done'
 
 ### changing the input method
-#picture = col2.file_uploader("Upload a picture", on_change=change_picture_state)
+picture = col2.file_uploader("Upload a picture", on_change=change_picture_state)
 picture = col2.camera_input("Please take a picture", on_change=change_picture_state)
 
 
@@ -67,6 +67,6 @@ if st.session_state['picture'] == 'done':
         st.write(f'### Your detected emotions are:')
         st.write(f'### :blue[{emotion_list[0]}]')
         #st.write(f'### :blue[{emotion_list[1]}]')
-        
-    print(response.reason)
-    response.content
+
+    # print(response.reason)
+    # response.content
