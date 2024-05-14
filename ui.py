@@ -64,9 +64,13 @@ if st.session_state['picture'] == 'done':
     col2.success("Picture uploaded successfully!")
 
     with st.expander("See your results:"):
-        st.write(f'### Your detected emotions are:')
-        st.write(f'### :blue[{emotion_list[0]}]')
-        #st.write(f'### :blue[{emotion_list[1]}]')
+        if len(emotion_list) == 1:
+            st.write(f'### Your detected emotions are:')
+            st.write(f'### :blue[{emotion_list[0]}]')
+        else:
+            st.write(f'### Your detected emotions are:')
+            st.write(f'### :blue[{emotion_list[0]}]')
+            st.write(f'### :blue[{emotion_list[1]}]')
 
     # print(response.reason)
     # response.content
