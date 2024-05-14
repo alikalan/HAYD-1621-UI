@@ -74,3 +74,38 @@ def app():
                 st.write(f'### Your detected emotions are:')
                 st.write(f'### :blue[{emotion_list[0]}]')
                 st.write(f'### :blue[{emotion_list[1]}]')
+
+            top_mood = next(iter(data_dict))
+            mood_list = ['angry', 'disgusted', 'fearful', 'happy', 'neutral', 'sad', 'surprised']
+            mood_int = int(mood_list.index(top_mood))
+
+        st.write('_______________________________________________')
+        st.write(f"##### If you're satisfied with the result, update your mood board!")
+        st.write(f"##### Othewise, take another picture.")
+        # bq_url = 'https://hayd1621-docker-v2-lempkfijgq-uc.a.run.app/save_to_bq'
+        bq_url = 'http://127.0.0.1:8000/save_to_bq'
+
+        st.markdown("""
+            <style>
+            /* Change the background color of the button */
+            .stButton>button {
+                background-color: #ff6347; /* Set your desired background color */
+                color: white; /* Set text color */
+            }
+            /* Hover effect for the button */
+            .stButton>button:hover {
+                background-color: ##60b4ff; /* Set your desired hover background color */
+                color: white; /* Set hover text color */
+            }
+            </style>
+        """, unsafe_allow_html=True)
+
+
+
+
+        if st.button('Save to mood board!'):
+            bq_response = requests.get(bq_url, params={'val': mood_int})
+            if bq_response.status_code == 200:
+                st.success('Data successfully saved to BigQuery!')
+            else:
+                st.error('Failed to save data to BigQuery.')
