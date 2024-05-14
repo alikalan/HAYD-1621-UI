@@ -59,16 +59,16 @@ def app():
             progress_bar = col2.progress(0)
 
             for percentage in range(100):
-                time.sleep(0.085)
+                time.sleep(0.04)
                 progress_bar.progress(percentage+1)
 
             col2.success("Picture uploaded successfully!")
 
-            with st.expander("See your results:"):
-                if len(emotion_list) == 1:
-                    st.write(f'### Your detected emotions are:')
-                    st.write(f'### :blue[{emotion_list[0]}]')
-                else:
-                    st.write(f'### Your detected emotions are:')
-                    st.write(f'### :blue[{emotion_list[0]}]')
-                    st.write(f'### :blue[{emotion_list[1]}]')
+            #with st.expander("See your results:"):
+            if len(emotion_list) == 1:
+                st.write(f'### Your detected emotions are:')
+                st.write(f'### :blue[{emotion_list[0]}]')
+            else:
+                st.write(f'### Your detected emotions are:')
+                st.write(f'### :blue[{emotion_list[0]}]')
+                st.write(f'### :blue[{emotion_list[1]}]')

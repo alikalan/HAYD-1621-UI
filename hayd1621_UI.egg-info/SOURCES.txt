@@ -1,6 +1,0 @@
-setup.py
-hayd1621_UI.egg-info/PKG-INFO
-hayd1621_UI.egg-info/SOURCES.txt
-hayd1621_UI.egg-info/dependency_links.txt
-hayd1621_UI.egg-info/requires.txt
-hayd1621_UI.egg-info/top_level.txt
