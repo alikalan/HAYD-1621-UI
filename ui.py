@@ -28,8 +28,8 @@ def app():
     picture_camera = col2.camera_input("Please take a picture", on_change=change_picture_state)
 
 
-    url = 'https://hayd1621-docker-v2-lempkfijgq-uc.a.run.app/upload_your_nice_face'
-    #url = 'http://127.0.0.1:8000/upload_your_nice_face'
+    # url = 'https://hayd1621-docker-v2-lempkfijgq-uc.a.run.app/upload_your_nice_face'
+    url = 'http://127.0.0.1:8000/upload_your_nice_face'
 
     if picture_upload is not None:
         picture = picture_upload
@@ -40,6 +40,7 @@ def app():
         files = {'img': picture}
         # Send the POST request with the image file
         response = requests.post(url, files=files)
+
         print('* * * picture taken * * *')
 
         #response.content
@@ -59,16 +60,33 @@ def app():
             progress_bar = col2.progress(0)
 
             for percentage in range(100):
-                time.sleep(0.04)
+                time.sleep(0.02)
                 progress_bar.progress(percentage+1)
 
             col2.success("Picture uploaded successfully!")
 
             #with st.expander("See your results:"):
             if len(emotion_list) == 1:
-                st.write(f'### Your detected emotions are:')
+                st.write(f'### Your top detected emotions are:')
                 st.write(f'### :blue[{emotion_list[0]}]')
             else:
                 st.write(f'### Your detected emotions are:')
                 st.write(f'### :blue[{emotion_list[0]}]')
                 st.write(f'### :blue[{emotion_list[1]}]')
+
+            top_mood = next(iter(data_dict))
+            mood_list = ['angry', 'disgusted', 'fearful', 'happy', 'neutral', 'sad', 'surprised']
+            mood_int = int(mood_list.index(top_mood))
+
+
+        st.write(f"If you're satisfied with the result, update your mood board!")
+        st.write(f"Othewise, take another picture.")
+        # bq_url = 'https://hayd1621-docker-v2-lempkfijgq-uc.a.run.app/save_to_bq'
+        bq_url = 'http://127.0.0.1:8000/save_to_bq'
+
+        if st.button('Save to mood board!'):
+            bq_response = requests.get(bq_url, params={'val': mood_int})
+            if bq_response.status_code == 200:
+                st.success('Data successfully saved to BigQuery!')
+            else:
+                st.error('Failed to save data to BigQuery.')
