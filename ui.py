@@ -8,12 +8,12 @@ def app():
     if 'picture' not in st.session_state:
         st.session_state['picture']='not done'
 
-    # creating to columns with 0.3/0.7 relation
-    col1, col2= st.columns([0.3,0.7])
 
-    col1.markdown("# HOW ARE YOU DOING TODAY? ")
-    col1.markdown("### __________ ")
-    col1.markdown("#### :orange[TIME TO CHECK YOUR EMOTIONS]")
+    st.title(f'HOW ARE YOU DOING TODAY ?')
+
+    st.write(f"### :orange[&#x2600; TIME TO CHECK YOUR EMOTIONS] ")
+
+    col1,col2 = st.columns([0.65,0.35])
 
     # function to track changes on the session_state
     def change_picture_state():
@@ -24,8 +24,8 @@ def app():
     picture_upload = None
     picture_camera = None
 
-    picture_upload = col2.file_uploader("Upload a picture", on_change=change_picture_state)
-    picture_camera = col2.camera_input("Please take a picture", on_change=change_picture_state)
+    picture_upload = col1.file_uploader("Upload a picture", on_change=change_picture_state)
+    picture_camera = col1.camera_input("Please take a picture", on_change=change_picture_state)
 
 
     url = 'https://hayd1621-docker-v2-lempkfijgq-uc.a.run.app/upload_your_nice_face'
@@ -73,4 +73,3 @@ def app():
                 st.write(f'### Your detected emotions are:')
                 st.write(f'### :blue[{emotion_list[0]}]')
                 st.write(f'### :blue[{emotion_list[1]}]')
-
