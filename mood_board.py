@@ -12,7 +12,7 @@ def app():
 
 
     def generate_data():
-        options = {"7 days": 7, "30 days": 30, "90 days": 90}
+        options = {"7 days": 7, "14 days": 14,"30 days": 30, "90 days": 90}
 
         # Create the dropdown menu
         selected_option = st.selectbox("Select the number of days:", list(options.keys()))
@@ -56,13 +56,13 @@ def app():
 
         mood_colors = {
             -1: (1, 1, 1, 0),  # white with alpha 0 for transparency (no color)
-            0: 'red',          # angry
-            1: 'green',        # disgusted
-            2: 'purple',       # fearful
-            3: 'yellow',       # happy
-            4: 'blue',         # neutral
-            5: 'grey',         # sad
-            6: 'orange'        # surprised
+            0: '#84c9ff',          # angry
+            1: '#0168c9',        # disgusted
+            2: '#ffacab',       # fearful
+            3: '#2ab09d',       # happy
+            4: '#7eefa1',         # neutral
+            5: '#ff2a2b',         # sad
+            6: '#ffd16a'        # surprised
         }
 
         # Create a list of colors for the colormap
