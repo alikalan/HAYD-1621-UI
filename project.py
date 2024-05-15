@@ -29,10 +29,10 @@ def app():
 
     col1,col2 = st.columns([0.3,0.7])
 
-    col1.image('data_images/gregory_iphone.png',caption='Picture taken on the app')
+    col1.image('data_images/HAYD1621 - Final Front.png',caption='Picture taken on the app')
     col2.write('')
     col2.write('')
-    col2.markdown("<p style='text-align: left;font-size: 18px;font-weight: bold;'>  Daily Notification to post a selfie</p>"
+    col2.markdown("<p style='text-align: left;font-size: 18px;font-weight: bold;'>  Take a daily selfie</p>"
                 , unsafe_allow_html=True)
     col2.markdown("<p style='text-align: left;font-size: 18px;font-weight: bold;'>  The app suggests your emotion of the day</p>"
                 , unsafe_allow_html=True)
@@ -41,7 +41,7 @@ def app():
                 , unsafe_allow_html=True)
     col2.markdown("<p style='text-align: left;font-size: 18px;font-weight: bold;'>  The app asks you to confirm or correct</p>"
                 , unsafe_allow_html=True)
-    col2.markdown("<p style='text-align: left;font-size: 18px;font-weight: bold;'>  Asks you to explain why in one sentence</p>"
+    col2.markdown("<p style='text-align: left;font-size: 18px;font-weight: bold;'>  You can save your emotion to your Mood Board</p>"
                 , unsafe_allow_html=True)
 
     st.write('----')
