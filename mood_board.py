@@ -8,7 +8,11 @@ import pytz
 
 def app():
 
-    st.write(f'## Keep Track of Your Mood !')
+    st.title('HOW ARE YOU DOING TODAY?')
+
+    col_left,col_cen,col_right = st.columns([0.4,0.3,0.3])
+    col_right.markdown('### :violet[- Mood Board - ]')
+    st.write('----')
 
 
     def generate_data():

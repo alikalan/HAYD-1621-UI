@@ -59,16 +59,16 @@ class MultiApp:
     def run():
         with st.sidebar:
             app = option_menu(
-        menu_title = 'How are you doing?',
-        options = ['Emotions App', 'Project', 'Mood Board', 'About the data'],
-        icons = ['app-indicator', 'info-square', 'table', 'database'],
+        menu_title = 'How are you doing, today?',
+        options = ['Emotions App', 'Mood Board', 'Project', 'About the data'],
+        icons = ['app-indicator', 'table','info-square', 'database'],
         menu_icon = 'emoji-smile-fill',
         default_index = 0,
-        orientation = 'horizontal',
+        orientation = 'vertical',
         styles={
         "container": {"padding": "30!important"},
-        "icon": {"font-size": "18px"},
-        "nav-link": {"font-size": "18px", "text-align": "left", "margin":"10px"},
+        "icon": {"font-size": "25px"},
+        "nav-link": {"font-size": "20px", "text-align": "left", "margin":"10px"},
         "nav-link-selected": {"background-color": "#60b4ff"},
     }
     )
