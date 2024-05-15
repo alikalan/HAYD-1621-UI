@@ -67,6 +67,9 @@ def app():
 
             col1.success("Picture uploaded successfully!")
 
+            # create some balloons
+            #st.balloons()
+
             #with st.expander("See your results:"):
             if len(emotion_list) == 1:
                 st.write(f"### It seems like you're feeling {emotion_list[0]} today")

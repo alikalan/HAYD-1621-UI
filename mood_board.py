@@ -8,7 +8,12 @@ import pytz
 
 def app():
 
-    st.write(f'## Keep Track of Your Mood !')
+    st.markdown("<p style='text-align: left;font-size: 45px;font-weight: bold;'>HOW ARE YOU DOING, TODAY?</p>"
+                , unsafe_allow_html=True)
+
+    st.markdown("<p style='text-align: right;font-size: 24px;font-weight: bold; color: #0068c9;'> - MOOD BOARD - </p>"
+                , unsafe_allow_html=True)
+    st.write('----')
 
 
     def generate_data():
