@@ -28,7 +28,6 @@ def app():
 	.stTabs [data-baseweb="tab"] {
 		height: 40px;
         white-space: pre-wrap;
-		background-color: #F0F2F6;
 		border-radius: 4px 4px 0px 0px;
 		gap: 1px;
 		padding-top: 5px;
@@ -135,6 +134,6 @@ def app():
         if st.button('Save to mood board!'):
             bq_response = requests.get(bq_url, params={'val': mood_int})
             if bq_response.status_code == 200:
-                st.success('Data successfully saved to BigQuery!')
+                st.success('Data successfully saved to Mood Board!')
             else:
-                st.error('Failed to save data to BigQuery.')
+                st.error('Failed to save data to Mood Board.')
