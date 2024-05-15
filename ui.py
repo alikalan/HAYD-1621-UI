@@ -2,6 +2,11 @@ import streamlit as st
 import requests
 import json
 import time
+import openai
+import toml
+
+secrets = toml.load("secrets/secrets.toml")
+openai.api_key = secrets["OPENAI_API_KEY"]
 
 def app():
     # Set session_state to not done
@@ -123,13 +128,16 @@ def app():
             #with st.expander("See your results:"):
             if len(emotion_list) == 1:
                 st.write(f"### It seems like you're feeling {emotion_list[0]} today")
-                # st.write(f'### Your top detected emotions are:')
-                # st.write(f'### :blue[{emotion_list[0]}]')
+                prompt =  f"""
+                I'm feeling {emotion_list[0]} today.
+                Can you give me three tips for what to do with the rest of my day?
+                """
             else:
                 st.write(f"### It seems like you're feeling {emotion_list[0]} today, and maybe a little {emotion_list[1]}.")
-                # st.write(f'### Your detected emotions are:')
-                # st.write(f'### :orange[{emotion_list[0]}]')
-                # st.write(f'### :orange[{emotion_list[1]}]')
+                prompt =  f"""
+                I'm feeling {emotion_list[0]} today, and maybe a little {emotion_list[1]}.
+                Can you give me three tips for what to do with the rest of my day?
+                """
 
             top_mood = next(iter(data_dict))
             mood_list = ['angry', 'disgusted', 'fearful', 'happy', 'neutral', 'sad', 'surprised']
@@ -156,12 +164,49 @@ def app():
             </style>
         """, unsafe_allow_html=True)
 
+        ### Update to Mood Board
 
+        cols_mb = st.columns([1, 1, 1])
+        with cols_mb[1]:
+            if st.button('Save to mood board!'):
+                bq_response = requests.get(bq_url, params={'val': mood_int})
+                if bq_response.status_code == 200:
+                    st.success('Data successfully saved to Mood Board!')
+                else:
+                    st.error('Failed to save data to Mood Board.')
 
+        ### OpenAPI integration
 
-        if st.button('Save to mood board!'):
-            bq_response = requests.get(bq_url, params={'val': mood_int})
-            if bq_response.status_code == 200:
-                st.success('Data successfully saved to Mood Board!')
+        def get_completion(prompt, model="gpt-3.5-turbo-16k"):
+            messages = [{"role": "user", "content": prompt}]
+            response = openai.ChatCompletion.create(
+                model=model,
+                messages=messages,
+                temperature=1, # this is the degree of randomness of the model's output
+            )
+            return response.choices[0].message["content"]
+
+        reply = None
+        user_input = None
+
+        st.write("Do you want some suggestions for what to do with the rest of your day?")
+        cols_openai = st.columns([1, 1, 1, 1, 1, 1])
+        with cols_openai[0]:
+            if st.button("Yes!"):
+                st.session_state['chat_with_ai'] = True
+        with cols_openai[1]:
+            if st.button("No."):
+                st.session_state['chat_with_ai'] = False
+                reply = "Ok! No problem :)"
+
+        if 'chat_with_ai' in st.session_state:
+            if st.session_state['chat_with_ai']==True:
+                user_input = st.text_input("Tell me a bit about yourself and why you are feeling this way", "")
+                # cols_submit = st.columns([1, 1, 1, 1, 1, 1, 1])
+                # with cols_submit[3]:
+                full_prompt = " ".join([prompt, user_input])
+                if st.button("Submit!"):
+                    reply = get_completion(full_prompt)
+                st.text_area("", value=reply, height=400)
             else:
-                st.error('Failed to save data to Mood Board.')
+                st.text_area("", value=reply, height=400)
