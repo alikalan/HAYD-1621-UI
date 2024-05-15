@@ -30,8 +30,8 @@ def app():
     picture_camera = tab2.camera_input("Please take a picture 🤳", on_change=change_picture_state)
 
 
-    url = 'https://hayd1621-docker-v2-lempkfijgq-uc.a.run.app/upload_your_nice_face'
-    #url = 'http://127.0.0.1:8000/upload_your_nice_face'
+    url = 'https://hayd1621-v3-lempkfijgq-ew.a.run.app//upload_your_nice_face'
+    # url = 'http://127.0.0.1:8000/upload_your_nice_face'
 
     if picture_upload is not None:
         picture = picture_upload
@@ -55,8 +55,8 @@ def app():
         emotion_list = []
         # for-loop to get the keys and values
         for key, value in data_dict.items():
-            result = f"{key} : {round(value,2)}%"
-            emotion_list.append(result)
+            # result = f"{key} : {round(value,2)}%"
+            emotion_list.append(key)
 
         if st.session_state['picture'] == 'done':
             progress_bar = col1.progress(0)
@@ -72,12 +72,14 @@ def app():
 
             #with st.expander("See your results:"):
             if len(emotion_list) == 1:
-                st.write(f'### Your top detected emotions are:')
-                st.write(f'### :blue[{emotion_list[0]}]')
+                st.write(f"### It seems like you're feeling {emotion_list[0]} today")
+                # st.write(f'### Your top detected emotions are:')
+                # st.write(f'### :blue[{emotion_list[0]}]')
             else:
-                st.write(f'### Your detected emotions are:')
-                st.write(f'### :orange[{emotion_list[0]}]')
-                st.write(f'### :orange[{emotion_list[1]}]')
+                st.write(f"### It seems like you're feeling {emotion_list[0]} today, and maybe a little {emotion_list[1]}.")
+                # st.write(f'### Your detected emotions are:')
+                # st.write(f'### :orange[{emotion_list[0]}]')
+                # st.write(f'### :orange[{emotion_list[1]}]')
 
             top_mood = next(iter(data_dict))
             mood_list = ['angry', 'disgusted', 'fearful', 'happy', 'neutral', 'sad', 'surprised']
@@ -86,8 +88,8 @@ def app():
         st.write('_______________________________________________')
         st.write(f"##### If you're satisfied with the result, update your mood board!")
         st.write(f"##### Othewise, take another picture.")
-        # bq_url = 'https://hayd1621-docker-v2-lempkfijgq-uc.a.run.app/save_to_bq'
-        bq_url = 'http://127.0.0.1:8000/save_to_bq'
+        bq_url = 'https://hayd1621-v3-lempkfijgq-ew.a.run.app/save_to_bq'
+        # bq_url = 'http://127.0.0.1:8000/save_to_bq'
 
         st.markdown("""
             <style>

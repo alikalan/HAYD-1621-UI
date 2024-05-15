@@ -16,7 +16,7 @@ def app():
 
 
     def generate_data():
-        options = {"7 days": 7, "30 days": 30, "90 days": 90}
+        options = {"7 days": 7, "14 days": 14,"30 days": 30, "90 days": 90}
 
         # Create the dropdown menu
         selected_option = st.selectbox("Select the number of days:", list(options.keys()))
@@ -25,8 +25,8 @@ def app():
         selected_days = options[selected_option]
 
 
-        # url = 'https://hayd1621-docker-v2-lempkfijgq-uc.a.run.app/upload_your_nice_face'
-        url = 'http://127.0.0.1:8000/fetch_mood_board'
+        url = 'https://hayd1621-v3-lempkfijgq-ew.a.run.app/fetch_mood_board'
+        # url = 'http://127.0.0.1:8000/fetch_mood_board'
         response = requests.get(url).json()['response']
         end = dt.datetime.strptime(max(response.keys()), "%Y-%m-%d").date()
         dates = list(reversed([end - dt.timedelta(days=i) for i in range(selected_days)]))
@@ -60,13 +60,13 @@ def app():
 
         mood_colors = {
             -1: (1, 1, 1, 0),  # white with alpha 0 for transparency (no color)
-            0: 'red',          # angry
-            1: 'green',        # disgusted
-            2: 'purple',       # fearful
-            3: 'yellow',       # happy
-            4: 'blue',         # neutral
-            5: 'grey',         # sad
-            6: 'orange'        # surprised
+            0: '#84c9ff',          # angry
+            1: '#0168c9',        # disgusted
+            2: '#ffacab',       # fearful
+            3: '#2ab09d',       # happy
+            4: '#7eefa1',         # neutral
+            5: '#ff2a2b',         # sad
+            6: '#ffd16a'        # surprised
         }
 
         # Create a list of colors for the colormap
