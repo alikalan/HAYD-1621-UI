@@ -3,5 +3,3 @@ streamlit-option-menu
 pandas
 matplotlib
 datetime
-dateutil
-plotly

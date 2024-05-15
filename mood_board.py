@@ -8,10 +8,11 @@ import pytz
 
 def app():
 
-    st.title('HOW ARE YOU DOING TODAY?')
+    st.markdown("<p style='text-align: left;font-size: 45px;font-weight: bold;'>HOW ARE YOU DOING, TODAY?</p>"
+                , unsafe_allow_html=True)
 
-    col_left,col_cen,col_right = st.columns([0.4,0.3,0.3])
-    col_right.markdown('### :violet[- Mood Board - ]')
+    st.markdown("<p style='text-align: right;font-size: 24px;font-weight: bold; color: #0068c9;'> - MOOD BOARD - </p>"
+                , unsafe_allow_html=True)
     st.write('----')
 
 

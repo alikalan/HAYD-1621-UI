@@ -4,10 +4,11 @@ import plotly.express as px
 
 def app():
 
-    st.title('HOW ARE YOU DOING TODAY?')
+    st.markdown("<p style='text-align: left;font-size: 45px;font-weight: bold;'>HOW ARE YOU DOING, TODAY?</p>"
+                , unsafe_allow_html=True)
 
-    col_left,col_cen,col_right = st.columns([0.4,0.25,0.35])
-    col_right.markdown('### :blue[- About the data - ]')
+    st.markdown("<p style='text-align: right;font-size: 24px;font-weight: bold; color: #0068c9;'> - ABOUT THE DATA - </p>"
+                , unsafe_allow_html=True)
     st.write('----')
 
     col_left2,col_cen2,col_right2 = st.columns([1.5,6,1.5])
@@ -25,18 +26,35 @@ def app():
 
     st.write('----')
 
+    st.markdown("<p style='text-align: center;font-size: 18px;font-weight: bold;'>To predict the emotions of different images, we trained our ResNet50 model on the 'Emotion Detection' dataset from Kaggle</p>"
+                , unsafe_allow_html=True)
+    #st.markdown('###### To predict the emotions of different images, we trained our ResNet50 model on the "Emotion Detection" dataset from Kaggle')
+    st.markdown('')
 
-    st.markdown('###### To predict the emotions of different images, we trained our ResNet50 model on the "Emotion Detection" dataset from Kaggle')
-    st.markdown('')
-    st.page_link('https://keras.io/api/applications/resnet/#resnet50-function', label='##### :computer:  :blue[- ResNet50 model function]')
-    st.markdown("""
-        ### The dataset contains:
-        ###### - 35,685 examples of 48x48 pixel gray scale images
-        ###### - divided into train and test dataset
-        ###### - categorized into seven different classes
-        """)
-    st.markdown('')
-    st.page_link('https://www.kaggle.com/datasets/ananthu017/emotion-detection-fer', label='##### :point_right:  :blue[- Kaggle Emotion Detection dataset]')
+    col_l1,col_l2,col_l3 = st.columns([0.27,0.63,0.1])
+    col_l2.page_link('https://keras.io/api/applications/resnet/#resnet50-function', label='#### :computer:  :blue[- ResNet50 model function]')
+    st.write('----')
+
+    st.markdown("<p style='text-align: center;font-size: 25px;font-weight: bold;'> THE DATASET CONTAINS</p>"
+                , unsafe_allow_html=True)
+
+    col_data,col_text = st.columns([0.4,0.6])
+
+    col_data.image('data_images/data_symbol_.png',caption='')
+    col_text.markdown('')
+    col_text.markdown('')
+    col_text.markdown('')
+    col_text.markdown("<p style='text-align: left;font-size: 18px;font-weight: bold;'>35,685 examples of 48x48 pixel gray scale images</p>"
+                , unsafe_allow_html=True)
+    col_text.markdown("<p style='text-align: left;font-size: 18px;font-weight: bold;'>Train and Test Set</p>"
+                , unsafe_allow_html=True)
+    col_text.markdown("<p style='text-align: left;font-size: 18px;font-weight: bold;'>Categorized into seven different classes</p>"
+                , unsafe_allow_html=True)
+    #col_text.page_link('https://www.kaggle.com/datasets/ananthu017/emotion-detection-fer', label='##### :blue[Kaggle Emotion Detection dataset]')
+    st.write('----')
+
+    col_l12,col_l22,col_l32 = st.columns([0.20,0.7,0.1])
+    col_l22.page_link('https://www.kaggle.com/datasets/ananthu017/emotion-detection-fer', label='#### :point_right:  :blue[- Kaggle Emotion Detection dataset]')
     st.write('----')
 
     data_train = {
