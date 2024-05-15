@@ -20,6 +20,55 @@ def app():
 
     #styling the tabs; color, font size
     st.markdown("""
+    <style>
+    :root {
+        --background-color-light: rgba(255, 255, 255, 0.6);
+        --text-color-light: #000;
+        --border-color-light: #ccc;
+        --background-color-dark: rgba(0, 0, 0, 0.6);
+        --text-color-dark: #ff6347;
+        --border-color-dark: #444;
+    }
+
+    .tabs {
+        display: flex;
+        border-bottom: 1px solid var(--border-color-light);
+        margin-bottom: 20px;
+    }
+
+    .tab {
+        padding: 10px 20px;
+        cursor: pointer;
+        border: 1px solid transparent;
+        border-radius: 4px 4px 0 0;
+        transition: background-color 0.3s, color 0.3s;
+        background-color: var(--background-color-light);
+        color: var(--text-color-light);
+        mix-blend-mode: multiply;
+    }
+
+    .tab:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    [data-theme="dark"] .tabs {
+        border-bottom-color: var(--border-color-dark);
+    }
+
+    [data-theme="dark"] .tab {
+        background-color: var(--background-color-dark);
+        color: var(--text-color-dark);
+    }
+
+    [data-theme="dark"] .tab:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    </style>
+""", unsafe_allow_html=True)
+
+    '''
+    st.markdown("""
 <style>
 
 	.stTabs [data-baseweb="tab-list"] {
@@ -40,6 +89,7 @@ def app():
     }
 
 </style>""", unsafe_allow_html=True)
+'''
 
     # function to track changes on the session_state
     def change_picture_state():
