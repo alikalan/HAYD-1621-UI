@@ -17,6 +17,7 @@ def app():
 
     # Create tabs with two options
     tab1, tab2, = st.tabs(["Take a Picture 📸", "Upload a Picture ⬆️"])
+
     #styling the tabs; color, font size
     st.markdown("""
 <style>
@@ -51,6 +52,7 @@ def app():
 
     picture_upload = tab2.file_uploader("Please upload a picture", on_change=change_picture_state)
     picture_camera = tab1.camera_input("Please take a picture 🤳", on_change=change_picture_state)
+
 
     url = 'https://hayd1621-v3-lempkfijgq-ew.a.run.app//upload_your_nice_face'
     # url = 'http://127.0.0.1:8000/upload_your_nice_face'
