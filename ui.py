@@ -67,30 +67,6 @@ def app():
     </style>
 """, unsafe_allow_html=True)
 
-    '''
-    st.markdown("""
-<style>
-
-	.stTabs [data-baseweb="tab-list"] {
-		gap: 15px;
-    }
-
-	.stTabs [data-baseweb="tab"] {
-		height: 40px;
-        white-space: pre-wrap;
-		border-radius: 4px 4px 0px 0px;
-		gap: 1px;
-		padding-top: 5px;
-		padding-bottom: 5px;
-        color: #ff6347;
-    }
-    .stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p {
-    font-size:1rem;
-    }
-
-</style>""", unsafe_allow_html=True)
-'''
-
     # function to track changes on the session_state
     def change_picture_state():
         st.session_state['picture']='done'
