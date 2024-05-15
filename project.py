@@ -5,7 +5,7 @@ def app():
     st.markdown("<p style='text-align: left;font-size: 45px;font-weight: bold;'>HOW ARE YOU DOING, TODAY?</p>"
                 , unsafe_allow_html=True)
 
-    st.markdown("<p style='text-align: right;font-size: 24px;font-weight: bold; color: #0068c9;'> - THE PROJECT - </p>"
+    st.markdown("<p style='text-align: right;font-size: 24px;font-weight: bold; color: #f46524;'> - THE PROJECT - </p>"
                 , unsafe_allow_html=True)
 
     st.write('----')
