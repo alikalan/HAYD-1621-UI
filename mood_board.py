@@ -28,7 +28,7 @@ def app():
         # url = 'https://hayd1621-docker-v2-lempkfijgq-uc.a.run.app/upload_your_nice_face'
         url = 'http://127.0.0.1:8000/fetch_mood_board'
         response = requests.get(url).json()['response']
-        end = dt.datetime.strptime(list(response.keys())[0], "%Y-%m-%d").date()
+        end = dt.datetime.strptime(max(response.keys()), "%Y-%m-%d").date()
         dates = list(reversed([end - dt.timedelta(days=i) for i in range(selected_days)]))
 
 
@@ -96,7 +96,7 @@ def app():
                 ax.text(j, i, int(day), ha='center', va='center')
 
         ax.set(xticks=np.arange(7),
-            xticklabels=['M', 'T', 'W', 'R', 'F', 'S', 'S'])
+            xticklabels=['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'])
         ax.xaxis.tick_top()
 
     def label_months(ax, dates, i, j, calendar):
