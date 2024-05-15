@@ -16,7 +16,7 @@ def app():
     col1,col2 = st.columns([0.99,0.01])
 
     # Create tabs with two options
-    tab1, tab2, = st.tabs(["Upload a Picture ⬆️", "Take a Picture 📸"])
+    tab1, tab2, = st.tabs(["Take a Picture 📸", "Upload a Picture ⬆️"])
     #styling the tabs; color, font size
     st.markdown("""
 <style>
@@ -35,12 +35,6 @@ def app():
 		padding-bottom: 5px;
         color: #ff6347;
     }
-    .stTabs [data-baseweb="tab-highlight"] {
-        background-color:#F0F2F6;
-    }
-	.stTabs [aria-selected="true"] {
-  		background-color: #FFFFFF;
-	}
     .stTabs [data-baseweb="tab-list"] button [data-testid="stMarkdownContainer"] p {
     font-size:1rem;
     }
@@ -57,8 +51,8 @@ def app():
     picture_upload = None
     picture_camera = None
 
-    picture_upload = tab1.file_uploader("Please upload a picture", on_change=change_picture_state)
-    picture_camera = tab2.camera_input("Please take a picture 🤳", on_change=change_picture_state)
+    picture_upload = tab2.file_uploader("Please upload a picture", on_change=change_picture_state)
+    picture_camera = tab1.camera_input("Please take a picture 🤳", on_change=change_picture_state)
 
 
     url = 'https://hayd1621-v3-lempkfijgq-ew.a.run.app//upload_your_nice_face'
