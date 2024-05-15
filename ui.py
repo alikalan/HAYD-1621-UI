@@ -41,7 +41,6 @@ def app():
 
 </style>""", unsafe_allow_html=True)
 
-
     # function to track changes on the session_state
     def change_picture_state():
         st.session_state['picture']='done'
@@ -53,7 +52,6 @@ def app():
 
     picture_upload = tab2.file_uploader("Please upload a picture", on_change=change_picture_state)
     picture_camera = tab1.camera_input("Please take a picture 🤳", on_change=change_picture_state)
-
 
     url = 'https://hayd1621-v3-lempkfijgq-ew.a.run.app//upload_your_nice_face'
     # url = 'http://127.0.0.1:8000/upload_your_nice_face'
