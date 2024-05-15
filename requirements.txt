@@ -4,3 +4,5 @@ pandas
 matplotlib
 datetime
 plotly
+openai==0.28
+toml

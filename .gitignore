@@ -1,5 +1,4 @@
-raw_data/
-models/
+secrets/
 
 ../.DS_Store
 .DS_Store
