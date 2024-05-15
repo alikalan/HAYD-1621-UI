@@ -69,7 +69,7 @@ class MultiApp:
         "container": {"padding": "30!important"},
         "icon": {"font-size": "25px"},
         "nav-link": {"font-size": "20px", "text-align": "left", "margin":"10px"},
-        "nav-link-selected": {"background-color": "#60b4ff"},
+        "nav-link-selected": {"background-color": "#f46524"},
     }
     )
 
