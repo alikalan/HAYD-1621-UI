@@ -3,6 +3,7 @@ import requests
 import json
 import time
 import openai
+import base64
 from params import *
 
 openai.api_key = OPENAI_API_KEY
@@ -208,6 +209,19 @@ def app():
 
     if 'chat_with_ai' in st.session_state:
         if st.session_state['chat_with_ai']==True:
-            st.text_area("ai_reply", label_visibility="hidden", value=reply, height=400)
+            logo_path = "data_images/openai.png"
+
+            # Read the image and encode it to base64
+            with open(logo_path, "rb") as image_file:
+                encoded_string = base64.b64encode(image_file.read()).decode()
+
+            # Create the powered by OpenAI line with the logo
+            st.markdown(f"""
+                <div style="display: flex; align-items: center;">
+                    <p style="margin: 0;">(powered by OpenAI)</p>
+                    <img src="data:image/png;base64,{encoded_string}" alt="OpenAI logo" style="height: 20px; margin-left: 5px;">
+                </div>
+            """, unsafe_allow_html=True)
+            st.text_area("ai",label_visibility="hidden", value=reply, height=400)
         else:
             st.text_area("bye", label_visibility="hidden", value=reply, height=400)
