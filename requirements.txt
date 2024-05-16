@@ -6,4 +6,3 @@ datetime
 plotly
 openai==0.28
 toml
-base64
