@@ -9,7 +9,6 @@ openai.api_key = OPENAI_API_KEY
 
 def app():
 
-    st.write(OPENAI_API_KEY)
     # Set session_state to not done
     if 'picture' not in st.session_state:
         st.session_state['picture']='not done'
