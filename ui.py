@@ -195,10 +195,10 @@ def app():
         # with cols_openai[0]:
         if st.button("Yes!"):
             st.session_state['chat_with_ai'] = True
-    # with cols_openai[1]:
-    if st.button("No."):
-        st.session_state['chat_with_ai'] = False
-        reply = "Ok! No problem :)"
+        # with cols_openai[1]:
+        if st.button("No."):
+            st.session_state['chat_with_ai'] = False
+            reply = "Ok! No problem :)"
 
     if 'chat_with_ai' in st.session_state:
         if st.session_state['chat_with_ai']==True:
