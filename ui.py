@@ -122,10 +122,6 @@ def app():
 
             col1.success("Picture uploaded successfully!")
 
-            # create some balloons
-            #st.balloons()
-
-            #with st.expander("See your results:"):
             if len(emotion_list) == 1:
                 st.write(f"### It seems like you're feeling {emotion_list[0]} today")
                 prompt =  f"""
@@ -142,10 +138,6 @@ def app():
             top_mood = next(iter(data_dict))
             mood_list = ['angry', 'disgusted', 'fearful', 'happy', 'neutral', 'sad', 'surprised']
             mood_int = int(mood_list.index(top_mood))
-
-        st.write('_______________________________________________')
-        st.write(f"##### If you're satisfied with the result, update your mood board!")
-        st.write(f"##### Othewise, take another picture.")
         bq_url = 'https://hayd1621-v3-lempkfijgq-ew.a.run.app/save_to_bq'
         # bq_url = 'http://127.0.0.1:8000/save_to_bq'
 
@@ -164,7 +156,21 @@ def app():
             </style>
         """, unsafe_allow_html=True)
 
+        ### Ask for elaboration
+
+        user_input = st.text_input("Tell me a bit about yourself and why you are feeling this way", "")
+        # cols_submit = st.columns([1, 1, 1, 1, 1, 1, 1])
+        # with cols_submit[3]:
+        if st.button("Submit!"):
+            st.session_state['full_prompt'] = " ".join([prompt, user_input])
+            st.success("Successfully submitted!")
+
+
         ### Update to Mood Board
+
+        st.write('_______________________________________________')
+        st.write(f"##### If you're satisfied with the result, update your mood board!")
+        st.write(f"##### Othewise, take another picture.")
 
         # cols_mb = st.columns([1, 1, 1])
         # with cols_mb[1]:
@@ -194,6 +200,7 @@ def app():
         # with cols_openai[0]:
         if st.button("Yes!"):
             st.session_state['chat_with_ai'] = True
+            reply = get_completion(st.session_state['full_prompt'])
         # with cols_openai[1]:
         if st.button("No."):
             st.session_state['chat_with_ai'] = False
@@ -201,12 +208,6 @@ def app():
 
     if 'chat_with_ai' in st.session_state:
         if st.session_state['chat_with_ai']==True:
-            user_input = st.text_input("Tell me a bit about yourself and why you are feeling this way", "")
-            # cols_submit = st.columns([1, 1, 1, 1, 1, 1, 1])
-            # with cols_submit[3]:
-            full_prompt = " ".join([prompt, user_input])
-            if st.button("Submit!"):
-                reply = get_completion(full_prompt)
             st.text_area("ai_reply", label_visibility="hidden", value=reply, height=400)
         else:
             st.text_area("bye", label_visibility="hidden", value=reply, height=400)
