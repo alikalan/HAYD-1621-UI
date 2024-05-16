@@ -3,12 +3,13 @@ import requests
 import json
 import time
 import openai
-import toml
+from params import *
 
-secrets = toml.load("secrets/secrets.toml")
-openai.api_key = secrets["OPENAI_API_KEY"]
+openai.api_key = OPENAI_API_KEY
 
 def app():
+
+    st.write(OPENAI_API_KEY)
     # Set session_state to not done
     if 'picture' not in st.session_state:
         st.session_state['picture']='not done'
@@ -166,14 +167,14 @@ def app():
 
         ### Update to Mood Board
 
-        cols_mb = st.columns([1, 1, 1])
-        with cols_mb[1]:
-            if st.button('Save to mood board!'):
-                bq_response = requests.get(bq_url, params={'val': mood_int})
-                if bq_response.status_code == 200:
-                    st.success('Data successfully saved to Mood Board!')
-                else:
-                    st.error('Failed to save data to Mood Board.')
+        # cols_mb = st.columns([1, 1, 1])
+        # with cols_mb[1]:
+        if st.button('Save to mood board!'):
+            bq_response = requests.get(bq_url, params={'val': mood_int})
+            if bq_response.status_code == 200:
+                st.success("Today's mood was successfully saved to the Mood Board!")
+            else:
+                st.error('Failed to save data to Mood Board.')
 
         ### OpenAPI integration
 
@@ -190,23 +191,23 @@ def app():
         user_input = None
 
         st.write("Do you want some suggestions for what to do with the rest of your day?")
-        cols_openai = st.columns([1, 1, 1, 1, 1, 1])
-        with cols_openai[0]:
-            if st.button("Yes!"):
-                st.session_state['chat_with_ai'] = True
-        with cols_openai[1]:
-            if st.button("No."):
-                st.session_state['chat_with_ai'] = False
-                reply = "Ok! No problem :)"
+        # cols_openai = st.columns([1, 1, 1, 1, 1, 1])
+        # with cols_openai[0]:
+        if st.button("Yes!"):
+            st.session_state['chat_with_ai'] = True
+    # with cols_openai[1]:
+    if st.button("No."):
+        st.session_state['chat_with_ai'] = False
+        reply = "Ok! No problem :)"
 
-        if 'chat_with_ai' in st.session_state:
-            if st.session_state['chat_with_ai']==True:
-                user_input = st.text_input("Tell me a bit about yourself and why you are feeling this way", "")
-                # cols_submit = st.columns([1, 1, 1, 1, 1, 1, 1])
-                # with cols_submit[3]:
-                full_prompt = " ".join([prompt, user_input])
-                if st.button("Submit!"):
-                    reply = get_completion(full_prompt)
-                st.text_area("", value=reply, height=400)
-            else:
-                st.text_area("", value=reply, height=400)
+    if 'chat_with_ai' in st.session_state:
+        if st.session_state['chat_with_ai']==True:
+            user_input = st.text_input("Tell me a bit about yourself and why you are feeling this way", "")
+            # cols_submit = st.columns([1, 1, 1, 1, 1, 1, 1])
+            # with cols_submit[3]:
+            full_prompt = " ".join([prompt, user_input])
+            if st.button("Submit!"):
+                reply = get_completion(full_prompt)
+            st.text_area("ai_reply", label_visibility="hidden", value=reply, height=400)
+        else:
+            st.text_area("bye", label_visibility="hidden", value=reply, height=400)
